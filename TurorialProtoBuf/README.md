@@ -1,8 +1,6 @@
-@[TOC](Android Studio 配置并使用Protocol Buffer生成java文件)
+### 一、android studio配置
 
-### android studio配置
-
-#### Project的build.gradle
+#### 1.1、 Project的build.gradle
 
 ```groovy
 buildscript {
@@ -17,11 +15,11 @@ buildscript {
 
 目前`Protobuf Plugin for Gradle`最版本是**0.8.17**，安装该版本的插件需要**Gradle 5.6** 和 **Java 8**，在`Maven Central`可用
 
-#### Module的build.gradle
+#### 1.2、Module的build.gradle
 
-##### 声明依赖的protobuf插件
+##### 1.2.1、声明依赖的`protobuf`插件（有两种方式）
 
-###### 采用apply方法
+1.2.1.1、采用`apply`方法
 
 ```groovy
 apply plugin: 'com.android.application'  // or 'com.android.library'
@@ -29,7 +27,7 @@ apply plugin: 'com.google.protobuf' //必须apply plugin: 'com.android.applicati
 ....
 ```
 
-###### 采用Gradle plugin DSL
+1.2.1.2、采用`Gradle plugin DSL`
 
 ```groovy
 plugins {
@@ -38,7 +36,7 @@ plugins {
 }
 ```
 
-##### 指定被编译proto文件所在的路径
+##### 1.2.2、指定被编译`proto`文件所在的路径
 
 ```groovy
 android {
@@ -59,9 +57,9 @@ android {
 
 **注意：不指定时，默认与java同级的目录(即${ProjectName}/app/src/main/java)**
 
-####  添加protobuf依赖与proto生成任务
+#####  1.2.3、添加protobuf依赖与proto生成任务（有两种方式）
 
-##### 采用版本为**3.0.x~3.7.x**的`Protobuf`
+1.2.3.1、采用版本为**3.0.x~3.7.x**的`Protobuf`
 
 ```groovy
 dependencies {
@@ -95,7 +93,7 @@ protobuf {
 }
 ```
 
-##### 采用版本为**3.8.0**之后的`Protobuf`
+1.2.3.2、采用版本为**3.8.0**之后的`Protobuf`
 
 ```groovy
 dependencies {
@@ -126,7 +124,7 @@ protobuf {
 
 **注意：`protobuf-javalit`与`protoc`的最新版本可在[maven仓库](https://search.maven.org/)搜索该两个字眼得到**
 
-### 编译proto文件
+### 二、编写proto文件
 
 `${ProjectName}/app/src/main/proto/addressbook.proto`
 
@@ -167,7 +165,7 @@ message AddressBook {
 
 [protobuf 语法教程](https://developers.google.com/protocol-buffers/docs/javatutorial)
 
-### 使用proto编译产物
+### 三、使用proto编译产物
 
 ```java
 Person john =
@@ -185,7 +183,7 @@ addressBookBuilder.addPeople(john);
 AddressBook addressBook = addressBookBuilder.build();
 ```
 
-### 参考
+### 四、参考
 
 [android studio 配置protobuf 参考](https://github.com/google/protobuf-gradle-plugin/blob/master/README.md)
-
+[Demo](https://github.com/JencharFung/Demo/tree/master/TurorialProtoBuf)
