@@ -1,0 +1,37 @@
+#指的当前目录变量LOCAL_PATH
+LOCAL_PATH:= $(call my-dir)
+include $(CLEAR_VARS)
+
+#LOCAL_MODULE_TAGS := user eng tests optional
+#user: 指该模块只在user版本下才编译
+#eng: 指该模块只在eng版本下才编译
+#tests: 指该模块只在tests版本下才编译
+#optional:指该模块在全部版本下都编译
+LOCAL_MODULE_TAGS := optional
+
+#指定apk的src目录
+LOCAL_SRC_FILES := $(call all-java-files-under, app/src/main/java)
+#指定apk的res目录
+LOCAL_RESOURCE_DIR := \
+    $(LOCAL_PATH)/app/src/main/res \
+
+#指定额外的Manifest,这里的Manifest和根目录Manifest其实是合并关系，不是覆盖
+LOCAL_FULL_LIBS_MANIFEST_FILES:=$(LOCAL_PATH)/app/src/main/AndroidManifest.xml
+
+LOCAL_STATIC_ANDROID_LIBRARIES := \
+    androidx.appcompat_appcompat \
+    com.google.android.material_material \
+    androidx-constraintlayout_constraintlayout \
+
+
+#要编译成apk的名字
+LOCAL_PACKAGE_NAME := TestCompileOnAosp
+#去除dex相关优化，这样好处就是我们编译出来apk是可以正常adb install的不然经过dex优化后，其实apk是个空壳
+LOCAL_DEX_PREOPT := false
+
+#设置该标记后会使用sdk的hide的api來编译。编译的APK中使用了系统级API，必须设定该值
+LOCAL_PRIVATE_PLATFORM_APIS := true
+#平台签名
+LOCAL_CERTIFICATE := platform
+
+include $(BUILD_PACKAGE)

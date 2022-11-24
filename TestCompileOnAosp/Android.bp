@@ -1,0 +1,18 @@
+android_app{
+	name: "TestCompileOnAosp",
+    srcs: ["app/src/main/java/**/*.java"],
+	resource_dirs: ["app/src/main/res"],
+	additional_manifests: [ //和Android.mk一样会在根目录也有个AndroidManifest只不过他是个壳，这里这个才是真正的，二者会合并
+        "app/src/main/AndroidManifest.xml",
+    ],
+    android_static_libs: [
+    	"androidx.appcompat_appcompat",
+    	"com.google.android.material_material",
+    	"androidx-constraintlayout_constraintlayout",
+    ],//依赖的jar包
+    dex_preopt: {
+        enabled: false,
+    }
+    platform_apis: true,//。和Android.mk中的	LOCAL_PRIVATE_PLATFORM_APIS的作用相同
+    certificate: "platform",//代表签名
+}
