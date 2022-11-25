@@ -108,7 +108,7 @@ android_app{
 	additional_manifests: [ //和Android.mk一样会在根目录也有个AndroidManifest只不过他是个壳，这里这个才是真正的，二者会合并
         "app/src/main/AndroidManifest.xml",
     ],
-    android_static_libs: [
+    static_libs: [
     	"androidx.appcompat_appcompat",
     	"com.google.android.material_material",
     	"androidx-constraintlayout_constraintlayout",
