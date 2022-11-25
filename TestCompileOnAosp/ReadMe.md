@@ -115,7 +115,7 @@ android_app{
     ],//依赖的jar包
     dex_preopt: {
         enabled: false,
-    }
+    },
     platform_apis: true,//。和Android.mk中的	LOCAL_PRIVATE_PLATFORM_APIS的作用相同
     certificate: "platform",//代表签名
 }
